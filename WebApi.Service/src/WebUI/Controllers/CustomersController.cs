@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.Commands;
+using Application.DTOs;
+using Application.Queries;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebUI.Controllers;
 
@@ -6,19 +10,26 @@ namespace WebUI.Controllers;
 [Route("[controller]")]
 public class CustomersController : ControllerBase
 {
+    private ISender _mediator;
+
+    public CustomersController(ISender mediator)
+    {
+        _mediator = mediator;
+    }
 
     [HttpPost]
     [Route("")]
-    public IActionResult CreateCustomer(object customer)
+    public async Task<ActionResult<int>> CreateCustomer(CreateCustomerCommand createCommand)
     {
-        return CreatedAtAction(nameof(CreateCustomer), customer);
+        var customerId = await _mediator.Send(createCommand);
+        return CreatedAtAction(nameof(CreateCustomer), customerId);
     }
 
     [HttpGet]
     [Route("")]
-    public IActionResult GetAllCustomers()
+    public async Task<ActionResult<List<CustomerDTO>>> GetAllCustomers()
     {
-        var customers = new List<object>();
-        return Ok(customers);
+        var getAllQuery = new GetAllCustomersQuery();
+        return await _mediator.Send(getAllQuery);
     }
 }
