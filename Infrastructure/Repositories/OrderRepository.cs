@@ -44,7 +44,7 @@ public class OrderRepository : IOrderRepository
 
     public async Task<OrderDTO> GetOrderById(int orderId, CancellationToken cancellationToken)
     {
-        var order = await _context.Orders.FirstAsync(o => o.Id == orderId);
+        var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == orderId);
 
         if (order == null)
         {
