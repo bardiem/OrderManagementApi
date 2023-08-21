@@ -10,7 +10,7 @@ namespace WebUI.Controllers;
 [Route("[controller]")]
 public class OrdersController : ControllerBase
 {
-    private ISender _mediator;
+    private readonly ISender _mediator;
 
     public OrdersController(ISender mediator)
     {

@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+	  <PackageReference Include="Azure.Messaging.ServiceBus" />
 	  <PackageReference Include="MediatR" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
@@ -16,7 +17,9 @@
 	  </PackageReference>
 	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" />
+	  <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
 	  <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+	  <PackageReference Include="System.Text.Json" />
   </ItemGroup>
 
 </Project>

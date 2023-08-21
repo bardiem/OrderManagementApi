@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Shared\Infrastructure.Common\Infrastructure.Common.csproj" />
-    <ProjectReference Include="..\WebApi.Service\src\Application\Application.csproj" />
+    <ProjectReference Include="..\..\..\Shared\Infrastructure.Common\Infrastructure.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" />
   </ItemGroup>
 
 </Project>
