@@ -21,8 +21,8 @@ public class OrdersController : ControllerBase
     [Route("")]
     public async Task<ActionResult<int>> CreateOrder(CreateOrderCommand createCommand)
     {
-        var orderId = await _mediator.Send(createCommand);
-        return CreatedAtAction(nameof(CreateOrder), orderId);
+        var createdOrder = await _mediator.Send(createCommand);
+        return CreatedAtRoute(nameof(GetOrderById), new { id = createdOrder.Id }, createdOrder);
     }
 
     [HttpGet]
@@ -34,7 +34,7 @@ public class OrdersController : ControllerBase
     }
 
     [HttpGet]
-    [Route("{id:int}")]
+    [Route("{id:int}", Name = "GetOrderById")]
     public async Task<ActionResult<OrderDTO>> GetOrderById(int id)
     {
         var getById = new GetOrderByIdQuery { OrderId = id };

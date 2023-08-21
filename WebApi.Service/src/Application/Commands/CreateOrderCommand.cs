@@ -1,11 +1,12 @@
-﻿using Application.Interfaces;
+﻿using Application.DTOs;
+using Application.Interfaces;
 using Infrastructure.Common.MessageQueue;
 using Infrastructure.Common.MessageQueue.Models;
 using MediatR;
 
 namespace Application.Commands;
 
-public record CreateOrderCommand : IRequest<int>
+public record CreateOrderCommand : IRequest<OrderDTO>
 {
     public IList<string> OrderItems { get; set; }
 
@@ -16,7 +17,7 @@ public record CreateOrderCommand : IRequest<int>
     public int CustomerId { get; set; }
 }
 
-public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, int>
+public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, OrderDTO>
 {
     private readonly IOrderRepository _orderRepository;
     private readonly IMessageProducerService<NewOrderCreatedMessage> _producer;
@@ -27,12 +28,12 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, int
         _producer = producer;
     }
 
-    public async Task<int> Handle(CreateOrderCommand command, CancellationToken cancellationToken)
+    public async Task<OrderDTO> Handle(CreateOrderCommand command, CancellationToken cancellationToken)
     {
-        var orderId = await _orderRepository.CreateOrder(command, cancellationToken);
+        var order = await _orderRepository.CreateOrder(command, cancellationToken);
 
         await _producer.ProduceAsync(new NewOrderCreatedMessage { CustomerId = command.CustomerId });
 
-        return orderId;
+        return order;
     }
 }

@@ -5,7 +5,7 @@ namespace Application.Interfaces;
 
 public interface IOrderRepository
 {
-    Task<int> CreateOrder(CreateOrderCommand createOrderCommand, CancellationToken cancellationToken);
+    Task<OrderDTO> CreateOrder(CreateOrderCommand createOrderCommand, CancellationToken cancellationToken);
 
     Task<OrderDTO> GetOrderById(int orderId, CancellationToken cancellationToken);
 

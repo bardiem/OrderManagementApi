@@ -22,7 +22,7 @@ public class OrderRepository : IOrderRepository
         _dateTime = dateTime;
     }
 
-    public async Task<int> CreateOrder(CreateOrderCommand createOrderCommand, CancellationToken cancellationToken)
+    public async Task<OrderDTO> CreateOrder(CreateOrderCommand createOrderCommand, CancellationToken cancellationToken)
     {
         var order = _orderMapper.ToEntity(createOrderCommand);
         order.Created = _dateTime.UtcNow;
@@ -31,7 +31,7 @@ public class OrderRepository : IOrderRepository
         await _context.AddAsync(order);
         await _context.SaveChangesAsync(cancellationToken);
 
-        return order.Id;
+        return _orderMapper.ToDto(order);
     }
 
     public async Task<IList<OrderDTO>> GetAllOrders(CancellationToken cancellationToken)
@@ -51,13 +51,6 @@ public class OrderRepository : IOrderRepository
             throw new NotFoundException("Order not found.");
         }
 
-        var mapped = new OrderDTO
-        {
-            Id = order.Id,
-            Price = order.Price.Value,
-            OrderItems = order.OrderItems.Split(","),
-        };
-
-        return mapped;
+        return _orderMapper.ToDto(order);
     }
 }

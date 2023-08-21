@@ -22,7 +22,7 @@ public class CustomersController : ControllerBase
     public async Task<ActionResult<int>> CreateCustomer(CreateCustomerCommand createCommand)
     {
         var customerId = await _mediator.Send(createCommand);
-        return CreatedAtAction(nameof(CreateCustomer), customerId);
+        return Created("", customerId);
     }
 
     [HttpGet]

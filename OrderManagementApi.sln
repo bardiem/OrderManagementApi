@@ -32,7 +32,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{08D557
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Common", "Shared\Infrastructure.Common\Infrastructure.Common.csproj", "{A6C2ACA7-E981-43B9-B0A9-8D9B53D2E89D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "OrderCount.Service\src\Infrastructure\Infrastructure.csproj", "{ED627239-C7AF-43D4-B21C-53ADAEE4DFBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "OrderCount.Service\src\Infrastructure\Infrastructure.csproj", "{ED627239-C7AF-43D4-B21C-53ADAEE4DFBA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "WebApi.Service\src\Infrastructure\Infrastructure.csproj", "{B0C33685-E763-4D9D-815F-2D5AE7408B1B}"
 EndProject

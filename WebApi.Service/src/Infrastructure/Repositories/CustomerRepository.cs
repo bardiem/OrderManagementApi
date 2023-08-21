@@ -21,7 +21,7 @@ public class CustomerRepository : ICustomerRepository
         _dateTime = dateTime;
     }
 
-    public async Task<int> CreateCustomer(CreateCustomerCommand createCustomerCommand, CancellationToken cancellationToken)
+    public async Task<CustomerDTO> CreateCustomer(CreateCustomerCommand createCustomerCommand, CancellationToken cancellationToken)
     {
         var customer = _customerMapper.ToEntity(createCustomerCommand);
         customer.Created = _dateTime.UtcNow;
@@ -30,7 +30,7 @@ public class CustomerRepository : ICustomerRepository
         await _context.Customers.AddAsync(customer);
         await _context.SaveChangesAsync(cancellationToken);
 
-        return customer.Id;
+        return _customerMapper.ToDto(customer);
     }
 
     public async Task<IList<CustomerDTO>> GetAllCustomers(CancellationToken cancellationToken)
